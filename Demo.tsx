@@ -18,12 +18,28 @@ import {
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import sensors from 'sensorsdata-analytics-react-native';
 
-function App(): JSX.Element {
+// @ts-ignore
+function Demo({navigation}): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const [loginId, setLoginId] = useState('');
   const [isAutoTrack, setIsAutoTrack] = useState(false);
   const [proJson, setProJson] = useState('');
+
+  useEffect(() => {
+    sensors.getSuperPropertiesPromise().then(res => {
+      console.log(999, res);
+      setProJson(JSON.stringify(res));
+    });
+    sensors.isAutoTrackEnabledPromise().then(res => {
+      setIsAutoTrack(res);
+      console.log('全埋点状态：', res);
+    });
+    sensors.getLoginIdPromise().then(res => {
+      setLoginId(res);
+      console.log('当前登陆人：', res);
+    });
+  }, []);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -34,31 +50,7 @@ function App(): JSX.Element {
       $latitude: 1,
       $longitude: 2,
     });
-    sensors.getSuperPropertiesPromise().then(res => {
-      console.log(999, res);
-      setProJson(JSON.stringify(res));
-    });
   };
-
-  useEffect(() => {
-    try {
-      // 神策初始化
-      sensors.init({
-        server_url:
-          'https://receiver.tracking.zcunsoft.com/api/gp?project=rn&token=fb70defc-44f5-11ef-9048-00163e30f75e',
-        show_log: true,
-        auto_track: 1 << 3,
-        heat_map: true,
-      });
-      sensors.trackAppInstall();
-    } catch (error) {
-      console.log('clklog', error);
-    }
-
-    return () => {
-      console.log(isDarkMode);
-    };
-  }, [isDarkMode]);
 
   // 手动埋点
   const track = () => {
@@ -78,14 +70,6 @@ function App(): JSX.Element {
     sensors.profileSetOnce({
       userId: 'CBE5C159-0172-4E55-B98D-0FE85187F6C1',
       userName: 'testUser',
-    });
-  };
-
-  // 获取埋点状态
-  const isAutoTrackClick = () => {
-    sensors.isAutoTrackEnabledPromise().then(res => {
-      setIsAutoTrack(res);
-      console.log('全埋点状态：', res);
     });
   };
 
@@ -122,19 +106,14 @@ function App(): JSX.Element {
             点击获取当前登陆人：{loginId}
           </Text>
           <Button title={'设置用户属性'} onPress={() => setUserPro()} />
-          <Text
-            onPress={() => {
-              isAutoTrackClick();
-            }}>
-            {' '}
-            点击获取全埋点状态：{isAutoTrack ? '开启' : '关闭'}
+          <Text>  全埋点状态：{isAutoTrack ? '开启' : '关闭'}
           </Text>
 
-          <Button title={'点击事件'} />
+          <Button title="Go back to Home" onPress={() => navigation.goBack()} />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-export default App;
+export default Demo;
