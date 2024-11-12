@@ -16,6 +16,15 @@ function HomeScreen({navigation}) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+      <Button
+        title="Details-自定义标题"
+        onPress={() => navigation.navigate('Details',{
+          sensorsdataparams:{
+              $title: '自定义Title',
+            },
+          })
+        }
+      />
     </View>
   );
 }
