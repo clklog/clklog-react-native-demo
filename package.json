@@ -18,7 +18,7 @@
     "react-native-gesture-handler": "2.13.4",
     "react-native-safe-area-context": "^4.11.0",
     "react-native-screens": "^3.27.0",
-    "sensorsdata-analytics-react-native": "https://gitee.com/appplugin/sensorsdata-analytics-react-native.git"
+    "sensorsdata-analytics-react-native": "https://gitee.com/clklog/sensorsdata-analytics-react-native-for-clklog.git"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
