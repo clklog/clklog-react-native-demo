@@ -39,6 +39,7 @@ const App = () => {
     try {
       // 神策初始化
       sensors.init({
+        //clklog 数据接收地址
         server_url:
           'https://receiver.tracking.zcunsoft.com/api/gp?project=rn&token=fb70defc-44f5-11ef-9048-00163e30f75e',
         show_log: true,

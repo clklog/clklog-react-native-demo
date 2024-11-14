@@ -15,17 +15,20 @@ yarn
 # sdk集成
 
 ```
+1. 引用sdk
 yarn add sensorsdata-analytics-react-native@https://gitee.com/clklog/sensorsdata-analytics-react-native-for-clklog.git
 
 
-配置 package.json 增加如下配置:
+2.增加配置
+在package.json 增加如下配置:
 "scripts": {
       "postinstall": "node node_modules/sensorsdata-analytics-react-native/SensorsDataRNHook.js -run"
 }
 
-iOS 需cd ios && pod install 安装依赖
+3.安装依赖
+iOS 需 cd ios && pod install 
 ```
 
-# demo使用的sdk在神策官网sdk集成上有做修改，可fork后自行修改
+# demo中使用的sdk在神策官方sdk基础上有做修改，修改后的sdk地址如下
 
 "sensorsdata-analytics-react-native": "<https://gitee.com/clklog/sensorsdata-analytics-react-native-for-clklog.git>"

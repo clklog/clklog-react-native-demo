@@ -52,7 +52,7 @@ function Demo({navigation}): JSX.Element {
     });
   };
 
-  // 手动埋点
+  // 自定义事件埋点
   const track = () => {
     sensors.track('BuyProduct', {
       ProductID: 123456,
@@ -61,7 +61,7 @@ function Demo({navigation}): JSX.Element {
   };
 
   const login = () => {
-    // 你的登陆逻辑
+    // todo 登陆逻辑
     sensors.login('CBE5C159-0172-4E55-B98D-0FE85187F6C1');
   };
 
